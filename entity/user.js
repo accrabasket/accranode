@@ -28,10 +28,10 @@ var getUserDetail = function(data, cb) {
     var query = '';
     var identifiers = 0;
     var queryData = [];
-    var columns = ['user_master.id', 'user_master.first_name', 'user_master.last_name', 'user_master.username', 'user_master.email', 'user_master.password', 'user_master.phone_number', 'user_master.company_id', 'ssv.expire_validity'];
+    var columns = ['user_master.id', 'user_master.first_name','user_master.username', 'user_master.email', 'user_master.password', 'user_master.phone_number'];
     query += 'select ?? from user_master';
     queryData[identifiers++] = columns;    
-    query += ' LEFT JOIN service_subscription_validity as ssv on ssv.company_id=user_master.company_id AND ssv.service_id=1';
+    //query += ' LEFT JOIN service_subscription_validity as ssv on ssv.company_id=user_master.company_id AND ssv.service_id=1';
     if(data.username != undefined){
         query += " where user_master.username=? ";
         queryData[identifiers++] = data.username;
@@ -72,7 +72,6 @@ var getUserDetail = function(data, cb) {
 module.exports.addCompanyUsers = function(parameters, roleDetail, cb){
     var query = '';
     var queryData = parameters;
-    console.log(queryData);
     query += 'INSERT INTO user_master set ?';
     mysqlDb.dbQuery(query, queryData, function(result){
         var response = {};

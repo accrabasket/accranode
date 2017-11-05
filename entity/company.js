@@ -65,23 +65,6 @@ module.exports.priceSave = function(parameters, cb) {
         }
     });
 }
-module.exports.addCompany = function(parameters, cb) {
-    var query = '';
-    var queryData = parameters.company;
-    query += 'INSERT INTO company_master set ?';
-    mysqlDb.dbQuery(query, queryData, function(result){
-        var response = {};
-        response.status = false;
-        if(result.insertId != undefined && result.insertId>0){
-            parameters.userDetail.company_id = result.insertId;
-            parameters.roleDetail = {};
-            parameters.roleDetail.role_id = 2;
-            userEntity.addCompanyUsers(parameters.userDetail, parameters.roleDetail, cb);
-        }else{
-            cb(response);
-        }
-    });
-}
 
 module.exports.getCompanyList = function(parameters, cb) {
     var query = '';
@@ -222,22 +205,9 @@ module.exports.updateCompany = function(parameters , cb){
     });
 }
 module.exports.addCompany = function(parameters, cb) {
-    var query = '';
-    var queryData = parameters.company;
-    console.log(queryData);
-    query += 'INSERT INTO company_master set ?';
-    mysqlDb.dbQuery(query, queryData, function(result){
-        var response = {};
-        response.status = false;
-        if(result.insertId != undefined && result.insertId>0){
-            parameters.userDetail.company_id = result.insertId;
-            parameters.roleDetail = {};
-            parameters.roleDetail.role_id = 2;
-            userEntity.addCompanyUsers(parameters.userDetail, parameters.roleDetail, cb);
-        }else{
-            cb(response);
-        }
-    });
+    parameters.roleDetail = {};
+    parameters.roleDetail.role_id = 2;
+    userEntity.addCompanyUsers(parameters.userDetail, parameters.roleDetail, cb);
 }
 
 module.exports.saveEmailTemplate = function(parameters, cb) {
