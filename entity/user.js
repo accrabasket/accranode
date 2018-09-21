@@ -32,8 +32,12 @@ var getUserDetail = function(data, cb) {
     query += 'select ?? from user_master';
     queryData[identifiers++] = columns;    
     //query += ' LEFT JOIN service_subscription_validity as ssv on ssv.company_id=user_master.company_id AND ssv.service_id=1';
+
+    query += clause+' user_master.status=?';        
+    queryData[identifiers++] = 1;    
+    
     if(data.username != undefined){
-        query += " where user_master.username=? ";
+        query += " AND user_master.username=? ";
         queryData[identifiers++] = data.username;
     }
     if(data.password != undefined){
