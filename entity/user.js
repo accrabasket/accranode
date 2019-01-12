@@ -29,7 +29,7 @@ var getUserDetail = function(data, cb) {
     var identifiers = 0;
     var queryData = [];
     var columns = ['user_master.id', 'user_master.first_name','user_master.username', 'user_master.email', 'user_master.password', 'user_master.phone_number'];
-    query += 'select ?? from user_master';
+    query += 'select user_master.password as wallet_key, ?? from user_master';
     queryData[identifiers++] = columns;    
     //query += ' LEFT JOIN service_subscription_validity as ssv on ssv.company_id=user_master.company_id AND ssv.service_id=1';
 
