@@ -2,7 +2,7 @@ var mysql = require('mysql');
 var conectionPool = mysql.createPool({
     host: "localhost",
     user: "root",
-    password: '',
+    password: 'truefalse',
     database: "accrabasket"
 });
 var dbQuery = function dbQuery(query, indetifiers, cb){
